@@ -5,6 +5,7 @@
 so after connecting we get that pika messages .
 <img src="nc.png"/>
 the first thing will popup in our minds is pokemon anime
+<img src="shock.gif" />
 </p>
 
 
