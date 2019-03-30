@@ -1,6 +1,6 @@
 # What is this ??
 <img src="images/treasure.png"/>
-after taking a deep look at this a saw the = at the end which confirmed my suspicuos that this is just a base64 file
+after taking a deep look at this , i saw the "=" at the end which confirmed my suspicuos that this is just a base64 file
 so lets decode the file using this website https://www.freeformatter.com/base64-encoder.html
 we get another file lets see what is it
 <img src="images/decoded.png"/>
