@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: pikachu
+Version: 0.1
+Summary: Pikachu interpreter
+Home-page: https://github.com/joelsmithjohnson/pikachu-interpreter
+Author: Joel Johnson
+Author-email: joelsmithjohnson@yahoo.com
+License: UNKNOWN
+Description: UNKNOWN
+Keywords: Pikachu,esolangs,Esoteric Programming
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Esoteric Programming
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Provides-Extra: dev
+Provides-Extra: test
