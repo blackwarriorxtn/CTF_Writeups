@@ -21,23 +21,22 @@ Hint! I am not very good with computers, I use my one safe password where I want
 since its a forensic challenge and we have a "Vmem" file it should be a vmware memory image
 so lets start doing our usual things with volatility
 > volatility -f HackTM.vmem imageinfo
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/imginf.png")
 oh so this is windows ! let's check all process running..
 > └──╼ $volatility -f HackTM.vmem --profile=Win7SP1x86_23418 pslist
-
-Nice, there's a KeePass.exe and challenge description says something about finding a password so
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/psslist.png")
+there's a KeePass.exe and challenge description says something about finding a password so
 Maybe the idea behind this is to find a way to leak the keepass .kdbx database and his master password from memory.
 
 First thing to do is a dump of the memory allocated for pid=3620 KeePass.exe
 
 > └──╼ $volatility -f HackTM.vmem --profile=Win7SP1x86_23418 memdump -p 3620 -D dump 
-
 So, if there's a keepass2 database loaded into memory, then you have a XML header too..
-
 How did I know this? read this manual : https://github.com/Stoom/KeePass/wiki/KDBX-v2-File-Format and u will find the xml format 
+![Alt text](http://dann.com.br/content/images/2017/05/Selection_834.png)
 so lets search that xml format in our dump using strings to confirm that we are not doing smth wrong !
-
 > └──╼ $strings 3620.dmp |grep xml
-
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/header.png)
 and with this we can confirm that our encrypted database can be found at memory, 
 
 Now we still need:
@@ -47,29 +46,30 @@ Now we still need:
 
 lets check the clipboard for the master password ! 
 > └──╼ $volatility -f ../HackTM.vmem --profile=Win7SP1x86_23418 clipboard -v
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/clipboard.png)
 the "DmVZQ" should be it so lets grep for it 
 > └──╼ $strings ../HackTM.vmem |grep dmVZQmd
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/masterpass.png)
 that should be the master password lets save it for later use and dump the entire .kdbx from memory !
 if you remember  in the manual : 
        |   kdb      |  kdbx pre-rel | kdbx relese |
 byte 1 | 0x9aa2d903 | 0x9aa2d903    | 0x9aa2d903  |  
 byte 2 | 0xb54bfb65 | 0xb54bfb66    | 0xb54bfb67  |  
 
-since its kdbx we should be searching for "0x9aa2d903 0xb54bfb67"
-but well since its in memory it will appear like this "d903 9aa2 fb67 b54b" instead
+since its kdbx we should be searching for "0x9aa2d903 0xb54bfb67" (first byte + second byte of the kdbx rel)
+but  since its in memory it will appear like this "d903 9aa2 fb67 b54b" instead
 so lets grep for that hex in our keepass memory dump 
 > └──╼ $hexdump 3620.dmp | grep "d903 9aa2 fb67 b54b"
-
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/hexdump.png?)
  but the problem is that we have more than one entry of this file at memory, we need to extract the correct one or it will be  a corrupted database.
  so lets use wXhexEditor.
 Search by our hex kdbx file signature 03 D9 A2 9A 67 FB 4B B5
-
 Look for an entry that has no blank spaces breaking the header and file footer..
 the first offset is a perfect example so lets dump it 
-
-doing file on it shows that we dumped the right thing so now lets start keepass using this database and the master password we got earlier ! 
-
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/kdbx.png)
+doing file on it shows that we dumped the right thing 
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/ok.png)
+so now lets start keepass using this database and the master password we got earlier ! 
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/attach.png)
 that should be it, saving that file and extracting it with the master password will give u the flag 
-```
-The flag.
-```
+
