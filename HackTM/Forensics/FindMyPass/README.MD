@@ -33,6 +33,7 @@ Maybe the idea behind this is to find a way to leak the keepass .kdbx database a
 First thing to do is a dump of the memory allocated for pid=3620 KeePass.exe
 
 > └──╼ $volatility -f HackTM.vmem --profile=Win7SP1x86_23418 memdump -p 3620 -D dump 
+
 So, if there's a keepass2 database loaded into memory, then you have a XML header too..
 How did I know this? read this manual : https://github.com/Stoom/KeePass/wiki/KDBX-v2-File-Format and u will find the xml format 
 ![Alt text](http://dann.com.br/content/images/2017/05/Selection_834.png)
