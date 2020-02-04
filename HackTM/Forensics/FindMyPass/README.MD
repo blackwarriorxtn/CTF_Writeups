@@ -22,11 +22,11 @@ since its a forensic challenge and we have a "Vmem" file it should be a vmware m
 so lets start doing our usual things with volatility
 > volatility -f HackTM.vmem imageinfo 
 
-![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/imginf.png")
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/imginf.png)
 oh so this is windows ! let's check all process running..
 > └──╼ $volatility -f HackTM.vmem --profile=Win7SP1x86_23418 pslist
 
-![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/psslist.png")
+![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/HackTM/Forensics/FindMyPass/psslist.png)
 there's a KeePass.exe and challenge description says something about finding a password so
 Maybe the idea behind this is to find a way to leak the keepass .kdbx database and his master password from memory.
 
