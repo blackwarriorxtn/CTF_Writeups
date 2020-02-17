@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Deep dive
+title: SarCTF DeepDive
 subtitle: extracting different types of nested archives(tar,gz,xz,zip)
 tags: [ctf, misc, writeups,bash]
 ---
