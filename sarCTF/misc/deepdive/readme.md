@@ -7,7 +7,7 @@ tags: [ctf, misc, writeups,bash]
 
 * **Category:** Misc
 * **Points:** 1000
-* **file:** [deepdive](treemycatisin.7z)
+* **file:** [deepdive](flag.txt)
 
  
 # Solution
