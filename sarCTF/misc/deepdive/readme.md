@@ -12,7 +12,7 @@ tags: [ctf, misc, writeups,bash]
  
 # Solution
 
-since there is a lot of nested archives there is no way that u can extract it manually so i made this script 
+since there is a lot of nested archives there is no way that u can extract them manually unless u want to spend 10hrs , so i made this script 
 
 
 ``` 
@@ -66,4 +66,5 @@ do
 done
 
 ```
-thats it Running the script will print out the flag !
+the script is very simple , it just looks for the file type and if there is a match it will do the work ! 
+thats it running the script will simply print out the flag
