@@ -33,7 +33,7 @@ so we can just do :
 
 ```$volatility -f memory.dmp --profile=Win7SP1x64 pslist  ```
 ![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/AeroCTF/Forensics/DrawingOnWalls/pstree.png?raw=true)
-now we can just dump the memory of the process "mspaint.exe" 
+next step is to dump the memory of the process "mspaint.exe" 
 why ? its very obvious since the challenge was talking about drawings .
 so we might find something by dumping that, and we can pass it to gimp so we can view the raw bytes as an image 
 and in order to view the raw data with gimp we need to change the extension to .data or it wont work 
