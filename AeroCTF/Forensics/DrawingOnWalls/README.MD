@@ -28,7 +28,9 @@ WARNING : volatility.debug    : Alignment of WindowsCrashDumpSpace64 is too smal
 volatility wasnt able to determine the profile so we have to manually suggest and lets assume its a Win7SP1x64
 now we can dump the process list 
 but why ? we need to check the running process to find out where the notes are saved or what process was used to take the notes !
+
 so we can just do : 
+
 ```$volatility -f memory.dmp --profile=Win7SP1x64 pslist  ```
 ![Alt text](https://github.com/blackwarriorxtn/CTF_Writeups/blob/master/AeroCTF/Forensics/DrawingOnWalls/pstree.png?raw=true)
 now we can just dump the memory of the process "mspaint.exe" 
